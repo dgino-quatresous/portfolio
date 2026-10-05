@@ -79,7 +79,7 @@
 </head>
 
 <body>
-    <button><a class="back-link" href="index.php">Retour à la page principale</a></button>
+    <a class="back-link" href="index.php"><button>Retour à la page principale</button></a>
     <div class="window">
         <div class="title-bar">
             <div class="title-bar-text">Fishnet</div>
@@ -89,7 +89,16 @@
             <h3>L'application de signalement de filet de pêche.</h3>
         </div>
     </div>
-    <div>
+    <br>
+    <div class="window">
+        <div class="title-bar">
+            <div class="title-bar-text">Description</div>
+        </div>
+        <div class="window-body">
+            <p>Fishnet est une application web qui permet aux utilisateurs de signaler les filets de pêche abandonnés ou
+                perdus dans les océans. L'application utilise une carte interactive pour localiser les filets signalés
+                et fournit des informations sur la manière de les récupérer en toute sécurité.</p>
+        </div>
 
     </div>
 </body>
