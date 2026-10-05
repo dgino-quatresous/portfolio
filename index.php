@@ -251,7 +251,6 @@
             var loaderSeenKey = "portfolio-loader-seen";
             var root = document.documentElement;
             var loadingScreen = document.querySelector(".loading-screen");
-            var portfolio = document.querySelector(".portfolio-window");
             var progressBar = document.getElementById("loading-progress-bar");
             var progressTrack = document.querySelector(".loading-progress");
             var loadingFiles = document.getElementById("loading-files");
@@ -303,7 +302,7 @@
 
                 setTimeout(function () {
                     loadingScreen.remove();
-                    portfolio.style.visibility = "visible";
+                    root.classList.add("has-seen-loader");
                 }, 120);
             }
 
