@@ -136,9 +136,78 @@
             line-height: 1.4;
         }
 
+        .desktop-file {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 124px;
+            padding: 4px;
+            border: 1px solid transparent;
+            color: #fff;
+            cursor: default;
+            user-select: none;
+        }
+
+        .desktop-file:focus,
+        .desktop-file:hover {
+            border-color: #fff;
+            outline: 1px dotted #000;
+            background: #000080;
+        }
+
+        .desktop-file-icon {
+            display: block;
+            width: 94px;
+            height: 94px;
+            object-fit: contain;
+        }
+
+        .desktop-file-label {
+            margin-top: 4px;
+            text-align: center;
+            text-shadow: 1px 1px #000;
+        }
+
+        .file-info-window {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            z-index: 3;
+            width: min(360px, calc(100% - 32px));
+            transform: translate(-50%, -50%);
+        }
+
+        .file-info-window[hidden] {
+            display: none;
+        }
+
+        .file-info-window .window-body {
+            line-height: 1.4;
+        }
+
+        .file-info-window .title-bar-controls button {
+            width: 16px;
+            min-width: 16px;
+            height: 14px;
+            padding: 0;
+        }
+
+        .file-info-window .title-bar {
+            cursor: move;
+        }
+
         @media (max-width: 760px) {
             body {
                 padding: 10px;
+            }
+
+            .desktop-file {
+                top: 10px;
+                right: 10px;
             }
 
             .project-list {
@@ -190,6 +259,27 @@
         </div>
     </div>
     <br>
+
+    <div class="desktop-file" id="text-file" role="button" tabindex="0" aria-label="Ouvrir le fichier texte">
+        <img class="desktop-file-icon" src="assets/image/txt_file_icon.png" alt="">
+        <span class="desktop-file-label">Contact.txt</span>
+    </div>
+
+    <div class="window file-info-window" id="file-info-window" role="dialog" aria-labelledby="file-info-title"
+        aria-modal="true" hidden>
+        <div class="title-bar">
+            <div class="title-bar-text" id="file-info-title">Contact.txt</div>
+            <div class="title-bar-controls">
+                <button type="button" aria-label="Fermer" id="close-file-info"></button>
+            </div>
+        </div>
+        <div class="window-body">
+            <p><strong>Comment me contacter?</strong></p>
+            <p>Vous pouvez me contacter par email à l'addresse suivantes :</p>
+            <p>qdgino18@gmail.com</p>
+        </div>
+    </div>
+
     <div class="window portfolio-window">
         <div class="title-bar">
             <div class="title-bar-text">A propo de moi</div>
@@ -324,6 +414,76 @@
 
             addFile();
             updateProgress();
+        }());
+
+        (function () {
+            var textFile = document.getElementById("text-file");
+            var infoWindow = document.getElementById("file-info-window");
+            var closeButton = document.getElementById("close-file-info");
+            var titleBar = infoWindow.querySelector(".title-bar");
+            var isDragging = false;
+            var dragOffsetX = 0;
+            var dragOffsetY = 0;
+
+            function openInfoWindow() {
+                infoWindow.hidden = false;
+                closeButton.focus();
+            }
+
+            function closeInfoWindow() {
+                infoWindow.hidden = true;
+                textFile.focus();
+            }
+
+            titleBar.addEventListener("pointerdown", function (event) {
+                if (event.target.closest("button")) {
+                    return;
+                }
+
+                var windowRect = infoWindow.getBoundingClientRect();
+
+                isDragging = true;
+                dragOffsetX = event.clientX - windowRect.left;
+                dragOffsetY = event.clientY - windowRect.top;
+                infoWindow.style.left = windowRect.left + "px";
+                infoWindow.style.top = windowRect.top + "px";
+                infoWindow.style.transform = "none";
+                titleBar.setPointerCapture(event.pointerId);
+                event.preventDefault();
+            });
+
+            titleBar.addEventListener("pointermove", function (event) {
+                if (!isDragging) {
+                    return;
+                }
+
+                infoWindow.style.left = event.clientX - dragOffsetX + "px";
+                infoWindow.style.top = event.clientY - dragOffsetY + "px";
+            });
+
+            titleBar.addEventListener("pointerup", function (event) {
+                isDragging = false;
+                titleBar.releasePointerCapture(event.pointerId);
+            });
+
+            titleBar.addEventListener("pointercancel", function (event) {
+                isDragging = false;
+                titleBar.releasePointerCapture(event.pointerId);
+            });
+
+            textFile.addEventListener("dblclick", openInfoWindow);
+            textFile.addEventListener("keydown", function (event) {
+                if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    openInfoWindow();
+                }
+            });
+            closeButton.addEventListener("click", closeInfoWindow);
+            document.addEventListener("keydown", function (event) {
+                if (event.key === "Escape" && !infoWindow.hidden) {
+                    closeInfoWindow();
+                }
+            });
         }());
     </script>
 </body>
