@@ -12,6 +12,14 @@
             background: #008080;
         }
 
+        p {
+            font-size: 14px;
+        }
+
+        ul {
+            font-size: 14px;
+        }
+
         .window {
             width: min(1100px, 100%);
             margin: 0 auto;
@@ -97,8 +105,9 @@
         <div class="window-body">
             <p>Fishnet est une application web qui permet aux utilisateurs de signaler les filets de pêche abandonnés ou
                 perdus dans les océans. L'application utilise une carte interactive pour localiser les filets signalés
-                et fournit des informations sur la manière de les récupérer en toute sécurité.</p>
+                et fournit des informations à une association de plongeur pour les récupérer en toute sécurité.</p>
         </div>
+
 
     </div>
 </body>

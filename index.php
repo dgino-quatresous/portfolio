@@ -12,6 +12,14 @@
             background: #008080;
         }
 
+        p {
+            font-size: 14px;
+        }
+
+        ul {
+            font-size: 14px;
+        }
+
         .portfolio-window {
             width: min(1100px, 100%);
             margin: 0 auto;
@@ -170,6 +178,7 @@
             margin-top: 4px;
             text-align: center;
             text-shadow: 1px 1px #000;
+            font-family: "Pixelated MS Sans Serif";
         }
 
         .file-info-window {
@@ -255,7 +264,7 @@
             <div class="title-bar-text">My Portfolio</div>
         </div>
         <div class="window-body">
-            <h2>Bienvenue sur le Portfolio de Dgino Quatresous</h2>
+            <h2>Bienvenue sur le Portfolio de Dgino Bouloré</h2>
         </div>
     </div>
     <br>
@@ -282,14 +291,25 @@
 
     <div class="window portfolio-window">
         <div class="title-bar">
-            <div class="title-bar-text">A propo de moi</div>
+            <div class="title-bar-text">Contenu principale</div>
         </div>
         <div class="window-body">
+            <h3>Mes compétences</h3>
+            <p>J'ai un diplome de développeur web et suis spécalisé dans la creation d'application web.</p>
+            <p>Tout au long de mes études, j'ai acquis des compétences clés tel que :</p>
+            <ul>
+                <li>Gestion de style CSS</li>
+                <li>Creation de script avec JavaScript</li>
+                <li>Programmation en PHP</li>
+                <li>Creation de base de données avec MySQL</li>
+                <li>Gestion de versions de projet avec GitHub</li>
+            </ul>
+
             <h3>Liste de mes projets.</h3>
         </div>
         <div class="project-list">
             <article class="project-card sunken-panel">
-                <img class="project-image" src="assets/project-placeholder.svg" alt="Image du projet 1">
+                <img class="project-image" src="assets/fishnet_thumbnail.png" alt="miniature fishnet">
                 <h3><a href="fishnet.php">Fishnet</a></h3>
                 <p>Application de localisation de filet de pêche</p>
             </article>
